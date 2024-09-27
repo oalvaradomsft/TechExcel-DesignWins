@@ -25,7 +25,7 @@ param restore bool = false
 @minLength(1)
 param apimPublisherEmail string = 'support@contososuites.com'
 
-var apiManagementServiceName = 'apim-${uniqueString(resourceGroup().id)}'
+var apiManagementServiceName = '${uniqueString(resourceGroup().id)}-apim'
 var apimSku = 'Basicv2'
 var apimSkuCount = 1
 var apimPublisherName = 'Contoso Suites'
@@ -53,7 +53,7 @@ var sqlAdminUsername = 'contosoadmin'
 
 var locations = [
   {
-    locationName: location
+    locationName: 'brazilsouth'
     failoverPriority: 0
     isZoneRedundant: false
   }
@@ -62,7 +62,7 @@ var locations = [
 @description('Creates an Azure Cosmos DB NoSQL account.')
 resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
   name: cosmosDbName
-  location: location
+  location: 'brazilsouth'
   kind: 'GlobalDocumentDB'
   properties: {
     consistencyPolicy: {
@@ -125,7 +125,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 @description('Creates an Azure AI Search service.')
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
   name: searchServiceName
-  location: location
+  location: 'brazilsouth'
   sku: {
     name: 'standard'
   }
